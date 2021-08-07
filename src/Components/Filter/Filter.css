@@ -1,0 +1,72 @@
+.filter {
+  padding: 35px;
+}
+
+.filter__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.filter__item {
+  border: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.filter__item:not(:last-child) {
+  margin-bottom: 50px;
+}
+
+.filter__label {
+  margin-bottom: 25px;
+  display: inline-block;
+  font-size: 14px;
+  color: #797979;
+}
+
+.filter__label::before {
+  content: "";
+  display: block;
+  background-image: url("../../images/sun.png");
+  background-position: left;
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 75px;
+  margin-bottom: 15px;
+}
+
+.filter__label--center::before {
+  background-image: url("../../images/wateringcan.png");
+  background-position: right;
+  transform: rotateY(180deg);
+}
+
+.filter__label--last::before {
+  content: "";
+  background-image: url("../../images/dog.png");
+  height: 62px;
+  margin-bottom: 26px;
+}
+
+@media screen and (min-width: 768px) {
+  .filter {
+    padding: 50px 35px;
+  }
+
+  .filter__form {
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: space-between;
+  }
+
+  .filter__item {
+    width: 33%;
+    max-width: 220px;
+  }
+
+  .filter__item:not(:last-child) {
+    margin-bottom: 0;
+  }
+}
