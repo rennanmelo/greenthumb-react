@@ -1,4 +1,5 @@
 import "./Filter.css";
+import FilterSelects from "./FilterSelects";
 
 const Filter = () => {
   const selectItems = [
@@ -63,41 +64,12 @@ const Filter = () => {
     },
   ];
 
-  const buildOptions = (select) => {
-    return select.options.map((option) => (
-      <option key={option.value} value={option.value}>
-        {option.text}
-      </option>
-    ));
-  };
-
-  const buildLabel = (select) => (
-    <label
-      htmlFor={select.id}
-      className={`filter__label ${select.label.modifier}`}
-    >
-      {select.label.text}
-    </label>
-  );
-
-  const buildSelects = (selectItems) => {
-    return selectItems.map((select) => (
-      <fieldset className="filter__item" key={select.id}>
-        {buildLabel(select)}
-        <select id={select.id} className="filter__select" defaultValue="null">
-          <option disabled value="null">
-            Select...
-          </option>
-          {buildOptions(select)}
-        </select>
-      </fieldset>
-    ));
-  };
-
   return (
     <section id="filter" className="filter">
       <div className="container">
-        <form className="filter__form">{buildSelects(selectItems)}</form>
+        <form className="filter__form">
+          <FilterSelects selects={selectItems} />
+        </form>
       </div>
     </section>
   );
