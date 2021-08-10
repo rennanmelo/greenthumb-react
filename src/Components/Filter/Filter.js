@@ -1,4 +1,3 @@
-import { Component } from "react";
 import FilterSelects from "./FilterSelects";
 import "./Filter.css";
 
@@ -64,35 +63,38 @@ const selectItems = [
   },
 ];
 
-class Filter extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      filters: null,
-    };
-    this.handleFilterChange = this.handleFilterChange.bind(this);
-  }
+const Filter = () => {
+  const handleFilterChange = (selectInfo) => {
+    apiCall(selectInfo);
+  };
 
-  handleFilterChange(selectInfo) {
-    this.setState({
-      filters: selectInfo,
-    });
-  }
+  const apiCall = (filters) => {
+    fetch(
+      `https://front-br-challenges.web.app/api/v2/green-thumb/?sun=${filters.sun}&water=${filters.water}&pets=${filters.pets}`
+    )
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => {
+        console.warn("Something went wrong. ", err);
+      });
+  };
 
-  render() {
-    return (
-      <section id="filter" className="filter">
-        <div className="container">
-          <form className="filter__form">
-            <FilterSelects
-              selects={selectItems}
-              handleFilterChange={this.handleFilterChange}
-            />
-          </form>
-        </div>
-      </section>
-    );
-  }
-}
+  return (
+    <section id="filter" className="filter">
+      <div className="container">
+        <form className="filter__form">
+          <FilterSelects
+            selects={selectItems}
+            handleFilterChange={handleFilterChange}
+          />
+        </form>
+      </div>
+    </section>
+  );
+};
 
 export default Filter;
