@@ -86,6 +86,10 @@ const Filter = () => {
         if (data.length > 0) {
           withResultsContent.classList.add("results__content--show");
           noResultsContent.classList.add("results__content--hide");
+
+          // Reorder the data by the staff_favorite = true at the beginning ("true" > "false")
+          data.sort((a, b) => (a.staff_favorite > b.staff_favorite ? -1 : 1));
+
           setDataPlants(data);
         } else {
           withResultsContent.classList.remove("results__content--show");
