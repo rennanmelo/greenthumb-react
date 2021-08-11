@@ -1,8 +1,9 @@
 import "./Results.css";
 import imgNoResults from "../../images/no-results.png";
 import imgPick from "../../images/pick.png";
+import Grid from "../Grid/Grid";
 
-const Results = () => {
+const Results = (props) => {
   return (
     <section id="results" className="results">
       <div className="container">
@@ -22,7 +23,7 @@ const Results = () => {
         >
           <img className="results__logo" src={imgPick} alt="Picks for you" />
           <h2 className="results__title">Our picks for you</h2>
-          <div className="grid"></div>
+          <Grid plants={props.plants} />
           <a className="results__button" href="#hero">
             <span className="results__icon"></span> to top
           </a>
