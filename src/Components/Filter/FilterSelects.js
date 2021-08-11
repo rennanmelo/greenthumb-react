@@ -1,5 +1,7 @@
+import { useState } from "react";
+
 const FilterSelects = (props) => {
-  let filterValues = {};
+  let [filterValues, setFilterValues] = useState({});
 
   const buildOptions = (select) => {
     return select.options.map((option) => (

@@ -1,4 +1,6 @@
+import { useState } from "react";
 import FilterSelects from "./FilterSelects";
+import Results from "../Results/Results";
 import "./Filter.css";
 
 const selectItems = [
@@ -64,11 +66,16 @@ const selectItems = [
 ];
 
 const Filter = () => {
+  let [dataPlants, setDataPlants] = useState();
+
   const handleFilterChange = (selectInfo) => {
     apiCall(selectInfo);
   };
 
   const apiCall = (filters) => {
+    const noResultsContent = document.querySelector("#no-results");
+    const withResultsContent = document.querySelector("#with-results");
+
     fetch(
       `https://front-br-challenges.web.app/api/v2/green-thumb/?sun=${filters.sun}&water=${filters.water}&pets=${filters.pets}`
     )
@@ -76,7 +83,18 @@ const Filter = () => {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
+        if (data.length > 0) {
+          withResultsContent.classList.add("results__content--show");
+          noResultsContent.classList.add("results__content--hide");
+
+          // Reorder the data by the staff_favorite = true at the beginning ("true" > "false")
+          data.sort((a, b) => (a.staff_favorite > b.staff_favorite ? -1 : 1));
+
+          setDataPlants(data);
+        } else {
+          withResultsContent.classList.remove("results__content--show");
+          noResultsContent.classList.remove("results__content--hide");
+        }
       })
       .catch((err) => {
         console.warn("Something went wrong. ", err);
@@ -84,16 +102,19 @@ const Filter = () => {
   };
 
   return (
-    <section id="filter" className="filter">
-      <div className="container">
-        <form className="filter__form">
-          <FilterSelects
-            selects={selectItems}
-            handleFilterChange={handleFilterChange}
-          />
-        </form>
-      </div>
-    </section>
+    <>
+      <section id="filter" className="filter">
+        <div className="container">
+          <form className="filter__form">
+            <FilterSelects
+              selects={selectItems}
+              handleFilterChange={handleFilterChange}
+            />
+          </form>
+        </div>
+      </section>
+      <Results plants={dataPlants} />
+    </>
   );
 };
 
