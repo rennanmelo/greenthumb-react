@@ -66,7 +66,6 @@ const selectItems = [
 ];
 
 const Filter = () => {
-  // let dataPlants = {};
   let [dataPlants, setDataPlants] = useState();
 
   const handleFilterChange = (selectInfo) => {
