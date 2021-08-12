@@ -2,6 +2,7 @@ import "./Results.css";
 import imgNoResults from "../../images/no-results.png";
 import imgPick from "../../images/pick.png";
 import Grid from "../Grid/Grid";
+import AnchorLink from "react-anchor-link-smooth-scroll";
 
 const Results = (props) => {
   return (
@@ -24,9 +25,9 @@ const Results = (props) => {
           <img className="results__logo" src={imgPick} alt="Picks for you" />
           <h2 className="results__title">Our picks for you</h2>
           <Grid plants={props.plants} />
-          <a className="results__button" href="#hero">
+          <AnchorLink className="results__button" href="#hero">
             <span className="results__icon"></span> to top
-          </a>
+          </AnchorLink>
         </div>
       </div>
     </section>
